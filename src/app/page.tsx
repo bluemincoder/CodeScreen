@@ -7,5 +7,9 @@ import {
     UserButton,
 } from "@clerk/nextjs";
 export default function Home() {
-    return <div className="m-10">home page</div>;
+    return <div className="m-10">
+        <SignInButton>
+            <Button>Sign In</Button>
+        </SignInButton>
+        </div>;
 }
