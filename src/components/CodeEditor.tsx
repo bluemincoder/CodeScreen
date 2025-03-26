@@ -24,11 +24,6 @@ function CodeEditor() {
     setCode(selectedQuestion.starterCode[newLanguage]);
   };
 
-  interface Example {
-      input: string;
-      output: string;
-      explanation?: string; // optional hai
-  }
 
   return (
       <ResizablePanelGroup
@@ -104,10 +99,13 @@ function CodeEditor() {
                                                   value={lang.id}
                                               >
                                                   <div className="flex items-center gap-2">
-                                                      <img
-                                                          src={`/${lang.id}.png`}
+                                                      <Image
+                                                          src={`/${lang.id}.png`} // Use lang.id here
                                                           alt={lang.name}
-                                                          className="w-5 h-5 object-contain"
+                                                          width={20}
+                                                          height={20}
+                                                          className="object-contain"
+                                                          priority
                                                       />
                                                       {lang.name}
                                                   </div>
@@ -194,9 +192,11 @@ function CodeEditor() {
                                   </CardHeader>
                                   <CardContent>
                                       <ul className="list-disc list-inside space-y-1.5 text-sm marker:text-muted-foreground">
-                                          {selectedQuestion.constraints.map((constraint: string, index: number) => (
-
-
+                                          {selectedQuestion.constraints.map(
+                                              (
+                                                  constraint: string,
+                                                  index: number
+                                              ) => (
                                                   <li
                                                       key={index}
                                                       className="text-muted-foreground"
