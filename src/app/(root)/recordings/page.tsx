@@ -46,7 +46,7 @@ function RecordingsPage() {
 
             {/* RECORDINGS GRID */}
 
-            <ScrollArea className="h-[calc(100vh-12rem)] mt-3">
+            <ScrollArea className="h-[calc(100vh-300px)] mt-3">
                 {recordings.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 pb-6">
                         {recordings.map((r) => (
