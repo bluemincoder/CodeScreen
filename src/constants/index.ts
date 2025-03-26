@@ -1,4 +1,7 @@
 import { Clock, Code2, Calendar, Users } from "lucide-react";
+// src/constants/index.ts
+import { CodeQuestion } from "../types"; // Adjust this path as necessary
+
 
 export const INTERVIEW_CATEGORY = [
   { id: "upcoming", title: "Upcoming Interviews", variant: "outline" },

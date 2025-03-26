@@ -86,7 +86,10 @@ function DashboardPage() {
                                             );
 
                                             return (
-                                                <Card className="hover:shadow-md transition-all">
+                                                <Card
+                                                    key={interview._id}
+                                                    className="hover:shadow-md transition-all"
+                                                >
                                                     {/* CANDIDATE INFO */}
                                                     <CardHeader className="p-4">
                                                         <div className="flex items-center gap-3">
