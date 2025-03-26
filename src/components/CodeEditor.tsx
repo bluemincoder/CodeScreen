@@ -111,7 +111,7 @@ function CodeEditor() {
                 <CardContent>
                   <ScrollArea className="h-full w-full rounded-md border">
                     <div className="p-4 space-y-4">
-                      {selectedQuestion.examples.map((example, index) => (
+                      {selectedQuestion.examples.map((example:any, index:any) => (
                         <div key={index} className="space-y-2">
                           <p className="font-medium text-sm">Example {index + 1}:</p>
                           <ScrollArea className="h-full w-full rounded-md">
@@ -143,7 +143,7 @@ function CodeEditor() {
                   </CardHeader>
                   <CardContent>
                     <ul className="list-disc list-inside space-y-1.5 text-sm marker:text-muted-foreground">
-                      {selectedQuestion.constraints.map((constraint, index) => (
+                      {selectedQuestion.constraints.map((constraint:any, index:any) => (
                         <li key={index} className="text-muted-foreground">
                           {constraint}
                         </li>

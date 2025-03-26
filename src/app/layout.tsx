@@ -30,29 +30,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ConvexClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <SignedIn>
-              <div className="min-h-screen">
-                <Navbar />
-                <main className="px-4 sm:px-6 lg:px-8">{children}</main>
-              </div>
-            </SignedIn>
+      <ConvexClerkProvider>
+          <html lang="en" suppressHydrationWarning>
+              <body
+                  className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+              >
+                  <ThemeProvider
+                      attribute="class"
+                      defaultTheme="system"
+                      enableSystem
+                      disableTransitionOnChange
+                  >
+                      <SignedIn>
+                          <div className="min-h-screen">
+                              <Navbar />
+                              <main className="px-4 sm:px-6 lg:px-8">
+                                  {children}
+                              </main>
+                          </div>
+                      </SignedIn>
 
-            <SignedOut>
-              <RedirectToSignIn />
-            </SignedOut>
-          </ThemeProvider>
-          <Toaster />
-        </body>
-      </html>
-    </ConvexClerkProvider>
+                      <SignedOut>
+                          <RedirectToSignIn />
+                      </SignedOut>
+                  </ThemeProvider>
+                  <Toaster />
+              </body>
+          </html>
+      </ConvexClerkProvider>
   );
 }
