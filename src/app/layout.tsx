@@ -43,7 +43,7 @@ export default function RootLayout({
                         disableTransitionOnChange
                     >
                         {/* Ultra-smooth background gradients */}
-                        <div className="fixed inset-0 bg-gradient-to-br from-blue-100/20 via-transparent to-purple-100/20 dark:from-blue-900/5 dark:via-transparent dark:to-purple-900/5 backdrop-blur-[150px] pointer-events-none" />
+                        <div className="fixed inset-0 bg-gradient-to-br from-blue-100/30 via-transparent dark:from-blue-900/5 dark:via-transparent to-purple-100/5 dark:to-purple-900/15 backdrop-blur-[100px] pointer-events-none" />
 
                         <SignedIn>
                             <div className="min-h-[calc(100vh-150px)] relative z-10">

@@ -46,15 +46,12 @@ export default function Home() {
                 <div className="absolute inset-0 bg-[linear-gradient(#1f1f1f_1px,transparent_1px),linear-gradient(90deg,#1f1f1f_1px,transparent_1px)] bg-[size:20px_20px]" />
             </div> */}
 
-            <section className="relative z-10 py-5 flex">
+            <section className="relative z-10 py-10 px-4 sm:px-6 lg:px-8">
                 <div className="container mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
-                        {/* Decorative corner */}
-                        {/* <div className="absolute -top-10 left-0 w-40 h-40 border-l-2 border-t-2 border-gray-700" /> */}
-
                         {/* Left Content */}
-                        <div className="lg:col-span-7 space-y-4 relative mt-10">
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                        <div className="lg:col-span-7 space-y-6">
+                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight">
                                 <div>Welcome to</div>
                                 <div className="text-blue-500">CodeScreen</div>
                                 <div className="pt-2 text-xl md:text-2xl lg:text-4xl">
@@ -68,9 +65,7 @@ export default function Home() {
                                 </div>
                             </h1>
 
-                            {/* <div className="h-px w-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 opacity-50" /> */}
-
-                            <p className="text-lg text-zinc-700 dark:text-zinc-600 max-w-lg">
+                            <p className="text-base sm:text-lg text-zinc-700 dark:text-zinc-600 max-w-xl">
                                 Conduct, record, and review coding interviews in
                                 real-time with support for C++, Python, Java,
                                 and more. Schedule interviews, assess candidates
@@ -79,7 +74,7 @@ export default function Home() {
                             </p>
 
                             {/* Stats */}
-                            <div className="flex flex-col sm:flex-row items-center justify-between gap-10 text-sm text-zinc-700 dark:text-zinc-600">
+                            <div className="flex flex-col sm:flex-row items-center sm:justify-start gap-8 text-sm text-zinc-700 dark:text-zinc-600">
                                 <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                                     <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-500">
                                         100+
@@ -89,7 +84,6 @@ export default function Home() {
                                     </div>
                                 </div>
 
-                                {/* Divider */}
                                 <div className="hidden sm:block h-12 w-px bg-gray-600" />
 
                                 <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
@@ -101,7 +95,6 @@ export default function Home() {
                                     </div>
                                 </div>
 
-                                {/* Divider */}
                                 <div className="hidden sm:block h-12 w-px bg-gray-600" />
 
                                 <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
@@ -117,10 +110,7 @@ export default function Home() {
                             {/* CTA Button */}
                             <SignedOut>
                                 <SignInButton mode="modal">
-                                    <button
-                                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg
-             transition-all duration-200 font-medium shadow-lg"
-                                    >
+                                    <button className="mt-6 flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg transition-all duration-200 font-medium shadow-lg">
                                         <LogIn className="w-4 h-4 transition-transform" />
                                         <span className="max-sm:hidden">
                                             Get Started!
@@ -129,9 +119,10 @@ export default function Home() {
                                 </SignInButton>
                             </SignedOut>
                         </div>
-                        {/* Right Content */}
+
+                        {/* Right Content (Image) — remains unchanged and hidden on small screens */}
                         <div className="absolute right-0 hidden lg:flex lg:col-span-5 justify-center items-center">
-                            <div className="relative w-[500px] h-[500px] xl:w-[700px] xl:h-[700px] ">
+                            <div className="relative w-[500px] h-[500px] xl:w-[700px] xl:h-[700px]">
                                 <div className="relative overflow-hidden w-full h-full">
                                     <Image
                                         src="/hero.png"
