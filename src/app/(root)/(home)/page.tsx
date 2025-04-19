@@ -262,19 +262,10 @@ export default function Home() {
             <div className="flex flex-col gap-10 mx-auto container">
                 {isInterviewer ? (
                     <>
-                        <motion.div
-                            ref={quickActionsAnimation.ref}
-                            variants={staggerVariants}
-                            initial=""
-                            animate={quickActionsAnimation.controls}
-                            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
-                        >
+                        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                             {QUICK_ACTIONS.map((action) => (
-                                <motion.div
+                                <div
                                     key={action.title}
-                                    variants={cardVariants}
-                                    whileHover={{ scale: 1.03, y: -5 }}
-                                    whileTap={{ scale: 0.97 }}
                                     className="h-full w-full cursor-pointer"
                                 >
                                     <ActionCard
@@ -283,9 +274,9 @@ export default function Home() {
                                             handleQuickAction(action.title)
                                         }
                                     />
-                                </motion.div>
+                                </div>
                             ))}
-                        </motion.div>
+                        </div>
 
                         <MeetingModal
                             isOpen={showModal}
@@ -326,26 +317,18 @@ export default function Home() {
                                     <Loader2Icon className="h-8 w-8 animate-spin text-muted-foreground" />
                                 </div>
                             ) : interviews.length > 0 ? (
-                                <motion.div
-                                    variants={staggerVariants}
-                                    initial="hidden"
-                                    animate={interviewsAnimation.controls}
-                                    className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-                                >
+                                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                                     {interviews.map((interview) => (
-                                        <motion.div
+                                        <div
                                             key={interview._id}
-                                            variants={cardVariants}
-                                            whileHover={{ scale: 1.03, y: -5 }}
-                                            whileTap={{ scale: 0.97 }}
                                             className="h-full w-full cursor-pointer"
                                         >
                                             <MeetingCard
                                                 interview={interview}
                                             />
-                                        </motion.div>
+                                        </div>
                                     ))}
-                                </motion.div>
+                                </div>
                             ) : (
                                 <div className="text-center py-12 text-muted-foreground">
                                     You have no scheduled interviews at the
