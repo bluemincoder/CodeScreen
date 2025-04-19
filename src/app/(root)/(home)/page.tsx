@@ -13,7 +13,7 @@ import { Loader2Icon, LogIn } from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
 import { SignedOut, SignInButton } from "@clerk/nextjs";
 import Image from "next/image";
-import { motion, useScroll, useInView, useAnimation } from "framer-motion";
+import { motion, useInView, useAnimation } from "framer-motion";
 
 // Custom hook for scroll animations
 const useScrollAnimation = () => {
@@ -145,7 +145,7 @@ export default function Home() {
                             </motion.h1>
 
                             <motion.p
-                                className="text-base sm:text-lg text-zinc-700 dark:text-zinc-600 max-w-xl"
+                                className="text-base sm:text-lg text-zinc-700 dark:text-zinc-600 max-w-xl -z-10"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 1.1, duration: 0.5 }}
@@ -231,7 +231,7 @@ export default function Home() {
                             transition={{ duration: 0.7, delay: 0.3 }}
                         >
                             <motion.div
-                                className="relative w-[500px] h-[500px] xl:w-[700px] xl:h-[700px]"
+                                className="relative w-[550px] h-[550px] xl:w-[750px] xl:h-[750px]"
                                 animate={{
                                     y: [0, -15, 0],
                                 }}
@@ -245,10 +245,10 @@ export default function Home() {
                                     <Image
                                         src="/hero.png"
                                         alt="CodeScreen Platform"
-                                        className="w-full h-full object-contain object-center drop-shadow-2xl"
+                                        className="w-full h-full object-contain object-center drop-shadow-2xl z-50"
                                         fill
                                         style={{
-                                            filter: "drop-shadow(0 20px 13px rgb(0 0 0 / 0.25))",
+                                            filter: "drop-shadow(0 20px 13px rgb(0 0 0 / 0.25)) z-50",
                                         }}
                                     />
                                 </div>
@@ -269,7 +269,7 @@ export default function Home() {
                             animate={quickActionsAnimation.controls}
                             className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
                         >
-                            {QUICK_ACTIONS.map((action, index) => (
+                            {QUICK_ACTIONS.map((action) => (
                                 <motion.div
                                     key={action.title}
                                     variants={cardVariants}
@@ -332,7 +332,7 @@ export default function Home() {
                                     animate={interviewsAnimation.controls}
                                     className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
                                 >
-                                    {interviews.map((interview, index) => (
+                                    {interviews.map((interview) => (
                                         <motion.div
                                             key={interview._id}
                                             variants={cardVariants}
