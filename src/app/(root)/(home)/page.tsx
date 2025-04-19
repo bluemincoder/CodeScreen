@@ -53,7 +53,7 @@ export default function Home() {
                         {/* <div className="absolute -top-10 left-0 w-40 h-40 border-l-2 border-t-2 border-gray-700" /> */}
 
                         {/* Left Content */}
-                        <div className="lg:col-span-7 space-y-4 relative">
+                        <div className="lg:col-span-7 space-y-4 relative mt-10">
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
                                 <div>Welcome to</div>
                                 <div className="text-blue-500">CodeScreen</div>
