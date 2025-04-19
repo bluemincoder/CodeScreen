@@ -31,35 +31,43 @@ export const TIME_SLOTS = [
 ];
 
 export const QUICK_ACTIONS = [
-  {
-    icon: Code2,
-    title: "New Call",
-    description: "Start an instant call",
-    color: "primary",
-    gradient: "from-primary/10 via-primary/5 to-transparent",
-  },
-  {
-    icon: Users,
-    title: "Join Interview",
-    description: "Enter via invitation link",
-    color: "purple-500",
-    gradient: "from-purple-500/10 via-purple-500/5 to-transparent",
-  },
-  {
-    icon: Calendar,
-    title: "Schedule",
-    description: "Plan upcoming interviews",
-    color: "blue-500",
-    gradient: "from-blue-500/10 via-blue-500/5 to-transparent",
-  },
-  {
-    icon: Clock,
-    title: "Recordings",
-    description: "Access past interviews",
-    color: "orange-500",
-    gradient: "from-orange-500/10 via-orange-500/5 to-transparent",
-  },
+    {
+        icon: Code2,
+        title: "New Call",
+        description: "Start an instant call",
+        color: "white",
+        gradient: "#1e3c72, #2a5298", // Deep blue to muted indigo
+    },
+    {
+        icon: Users,
+        title: "Join Interview",
+        description: "Enter via invitation link",
+        color: "white",
+        gradient: "#42275a, #734b6d", // Muted purple-pink blend
+    },
+    {
+        icon: Calendar,
+        title: "Schedule",
+        description: "Plan upcoming interviews",
+        color: "white",
+        gradient: "#134e4a, #2dd4bf", // Dark teal to soft cyan
+    },
+    {
+        icon: Clock,
+        title: "Recordings",
+        description: "Access past interviews",
+        color: "white",
+        gradient: "#283E51, #485563", // Steel blue-gray
+    },
 ];
+
+
+
+
+
+
+
+
 export const LANGUAGES = [
     { id: "javascript", name: "JavaScript", icon: "/javascript.png" },
     { id: "python", name: "Python", icon: "/python.png" },

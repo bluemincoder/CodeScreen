@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# CodeScreen
 
-First, run the development server:
+## Overview
+CodeScreen is an advanced online interview platform designed to streamline the technical interview process. Developed using **Next.js**, **TypeScript**, **Stream**, **Convex**, and **Clerk**, the platform facilitates seamless interview experiences with video calls, real-time code editing, and interview feedback capabilities. CodeScreen offers a dynamic environment for interviewers and interviewees, making technical assessments more effective and collaborative.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+![Landing Page Preview](./public/landing-page-preview.png)
+![Interview Call Preview](./public/interview-call-preview.png)
+
+---
+
+## Problem/Why?
+Technical interviews can often be unstructured and challenging to manage, leading to inefficient assessments. CodeScreen addresses these issues by providing a unified platform for video calls, screen sharing, code collaboration, and structured feedback, ensuring a seamless interview experience for both interviewers and candidates.
+
+---
+
+## Background
+With the increasing demand for remote technical interviews, CodeScreen aims to replicate the efficiency of in-person assessments. Utilizing modern web technologies and frameworks, the platform facilitates real-time interaction, effective problem-solving, and structured evaluation.
+
+---
+
+## Core Features
+
+### **Interview Experience:**
+- **Video Call Panel:** Real-time video calls with screen sharing and recording capabilities.
+- **Reactions & Feedback:** Emoji reactions for non-verbal communication.
+- **Screen Recording:** Capture interview sessions for future review.
+
+### **Problem Solving:**
+- **DSA Question Panel:** Display problems with detailed descriptions, constraints, and test cases.
+- **Code Editor:** Real-time collaborative editor supporting C++, Java, and Python.
+- **Test Case Validation:** Validate code solutions against test cases provided by the interviewer.
+
+### **Interviewer Utilities:**
+- **Question Management:** Add, edit, and delete DSA questions with ease.
+- **Interview Scheduling:** Schedule, start, and manage interview sessions.
+- **Feedback System:** Provide structured feedback for each interview session.
+
+### **Authentication & Authorization:**
+- Secure authentication and role-based access control using **Clerk**.
+
+---
+
+## Technologies Used
+
+- **Frontend:**
+  - Next.js & TypeScript
+  - Tailwind CSS & ShadCn for styling
+  - Stream for real-time communication
+
+- **Backend:**
+  - Convex for data management and state synchronization
+  - Server Components and Server Actions for optimized performance
+
+- **Authentication:**
+  - Clerk for user authentication and authorization
+
+---
+
+## Setup Instructions
+
+### Environment Variables:
+Create a `.env` file in the root directory with the following variables:
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+CONVEX_DEPLOYMENT=
+NEXT_PUBLIC_CONVEX_URL=
+NEXT_PUBLIC_STREAM_API_KEY=
+STREAM_SECRET_KEY=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Running the Application
+1. Install dependencies: `npm install`
+2. Start the development server: `npm run dev`
+3. Access the app on `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Future Enhancements
+- Integration with third-party coding platforms (e.g., Codeforces, LeetCode)
+- Advanced analytics for interview feedback
+- Support for additional programming languages
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+CodeScreen redefines technical interviews by combining modern technologies to create a structured, interactive, and effective assessment environment.

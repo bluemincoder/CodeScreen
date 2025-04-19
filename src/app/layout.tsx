@@ -38,13 +38,18 @@ export default function RootLayout({
                 >
                     <ThemeProvider
                         attribute="class"
-                        defaultTheme="system"
+                        defaultTheme="light"
                         enableSystem
                         disableTransitionOnChange
                     >
+                        {/* Ultra-smooth background gradients */}
+                        <div className="fixed inset-0 bg-gradient-to-br from-blue-100/20 via-transparent to-purple-100/20 dark:from-blue-900/5 dark:via-transparent dark:to-purple-900/5 backdrop-blur-[150px] pointer-events-none" />
+
                         <SignedIn>
-                            <div className="min-h-[calc(100vh-90px)]">
-                                <Navbar />
+                            <div className="min-h-[calc(100vh-150px)] relative z-10">
+                                <div className="mt-4 px-4 sm:px-6 lg:px-8">
+                                    <Navbar />
+                                </div>
                                 <main className="px-4 sm:px-6 lg:px-8">
                                     {children}
                                 </main>
