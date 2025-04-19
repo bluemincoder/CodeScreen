@@ -10,7 +10,7 @@ function ActionCard({
 }) {
     return (
         <Card
-            className="group relative overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-lg cursor-pointer h-full"
+            className="group relative overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-lg cursor-pointer h-full w-full flex flex-col"
             onClick={onClick}
         >
             {/* ABSOLUTE GRADIENT BACKGROUND */}
@@ -21,7 +21,7 @@ function ActionCard({
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
-                    opacity: 0.5,
+                    opacity: 1,
                     pointerEvents: "none",
                 }}
             />
@@ -40,10 +40,10 @@ function ActionCard({
 
                     {/* TITLE + DESCRIPTION */}
                     <div className="space-y-1">
-                        <h3 className="font-semibold text-lg sm:text-xl group-hover:text-primary transition-colors">
+                        <h3 className="font-semibold text-lg sm:text-xl group-hover:text-black transition-colors text-white">
                             {action.title}
                         </h3>
-                        <p className="text-xs sm:text-sm text-muted-foreground">
+                        <p className="text-xs sm:text-sm text-zinc-300">
                             {action.description}
                         </p>
                     </div>
