@@ -51,13 +51,13 @@ export default function Home() {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
                         {/* Left Content */}
                         <div className="lg:col-span-7 space-y-6">
-                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                            <h1 className="text-5xl md:text-5xl lg:text-6xl font-bold tracking-tight">
                                 <div>Welcome to</div>
                                 <div className="text-blue-500">CodeScreen</div>
-                                <div className="pt-2 text-xl md:text-2xl lg:text-4xl">
+                                <div className="pt-2 text-2xl md:text-2xl lg:text-4xl">
                                     Your all-in-one
                                 </div>
-                                <div className="pt-2 text-xl md:text-2xl lg:text-4xl">
+                                <div className="pt-2 text-2xl md:text-2xl lg:text-4xl">
                                     Technical Interview{" "}
                                     <span className="text-blue-500">
                                         Platform
@@ -74,34 +74,39 @@ export default function Home() {
                             </p>
 
                             {/* Stats */}
-                            <div className="flex flex-col sm:flex-row items-center sm:justify-start gap-8 text-sm text-zinc-700 dark:text-zinc-600">
-                                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-                                    <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-500">
+                            <div className="flex flex-row items-center gap-4 xs:gap-6 sm:gap-8 text-xs sm:text-sm text-zinc-700 dark:text-zinc-600">
+                                {/* Interviews Done */}
+                                <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-[80px]">
+                                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-500">
                                         100+
                                     </div>
-                                    <div className="uppercase tracking-wider">
+                                    <div className="uppercase text-[10px] sm:text-xs ">
                                         Interviews Done
                                     </div>
                                 </div>
 
-                                <div className="hidden sm:block h-12 w-px bg-gray-600" />
+                                {/* Divider */}
+                                {/* <div className="h-10 w-px bg-gray-600 hidden xs:block" />    */}
 
-                                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-                                    <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-500">
+                                {/* Languages Supported */}
+                                <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-[80px]">
+                                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-500">
                                         4
                                     </div>
-                                    <div className="uppercase tracking-wider">
+                                    <div className="uppercase text-[10px] sm:text-xs ">
                                         Languages Supported
                                     </div>
                                 </div>
 
-                                <div className="hidden sm:block h-12 w-px bg-gray-600" />
+                                {/* Divider */}
+                                {/* <div className="h-10 w-px bg-gray-600 hidden xs:block" /> */}
 
-                                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-                                    <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-500">
+                                {/* Session Recording */}
+                                <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-[80px]">
+                                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-500">
                                         100%
                                     </div>
-                                    <div className="uppercase tracking-wider">
+                                    <div className="uppercase text-[10px] sm:text-xs ">
                                         Session Recording
                                     </div>
                                 </div>
@@ -138,10 +143,10 @@ export default function Home() {
             </section>
 
             {/* Add UserPrograms section if needed */}
-            <div className="py-10 flex flex-col gap-10 mx-auto container">
+            <div className="flex flex-col gap-10 mx-auto container">
                 {isInterviewer ? (
                     <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                             {QUICK_ACTIONS.map((action) => (
                                 <ActionCard
                                     key={action.title}

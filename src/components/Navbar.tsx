@@ -8,7 +8,7 @@ import { Blocks } from "lucide-react";
 function Navbar() {
     return (
         <nav className="w-full bg-transparent">
-            <div className="flex h-16 sm:h-20 items-center justify-between container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-row h-16 sm:h-20 items-center justify-between container mx-auto">
                 {/* LEFT SIDE - LOGO */}
                 <Link
                     href="/"
