@@ -79,27 +79,33 @@ export default function Home() {
                             </p>
 
                             {/* Stats */}
-                            <div className="flex items-center gap-10 text-sm text-zinc-700 dark:text-zinc-600">
-                                <div className="flex flex-col">
-                                    <div className="text-5xl font-bold text-blue-500">
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-10 text-sm text-zinc-700 dark:text-zinc-600">
+                                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                                    <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-500">
                                         100+
                                     </div>
                                     <div className="uppercase tracking-wider">
                                         Interviews Done
                                     </div>
                                 </div>
-                                <div className="h-12 w-px bg-gray-600" />
-                                <div className="flex flex-col">
-                                    <div className="text-5xl font-bold text-blue-500">
+
+                                {/* Divider */}
+                                <div className="hidden sm:block h-12 w-px bg-gray-600" />
+
+                                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                                    <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-500">
                                         4
                                     </div>
                                     <div className="uppercase tracking-wider">
                                         Languages Supported
                                     </div>
                                 </div>
-                                <div className="h-12 w-px bg-gray-600" />
-                                <div className="flex flex-col">
-                                    <div className="text-5xl font-bold text-blue-500">
+
+                                {/* Divider */}
+                                <div className="hidden sm:block h-12 w-px bg-gray-600" />
+
+                                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                                    <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-500">
                                         100%
                                     </div>
                                     <div className="uppercase tracking-wider">
