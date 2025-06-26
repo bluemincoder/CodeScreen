@@ -3,13 +3,14 @@ import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
 export const useUserRole = () => {
-  const { user } = useUser();
+  const { user, isSignedIn } = useUser();
 
   const userData = useQuery(api.users.getUserByClerkId, {
     clerkId: user?.id || "",
   });
 
-  const isLoading = userData === undefined;
+  // If user is not signed in, don't show loading state
+  const isLoading = isSignedIn ? userData === undefined : false;
 
   return {
     isLoading,
