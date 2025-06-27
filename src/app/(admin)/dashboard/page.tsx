@@ -32,7 +32,7 @@ import { useSession, signIn } from "next-auth/react";
 type Interview = Doc<"interviews">;
 
 function DashboardPage() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const users = useQuery(api.users.getUsers);
   const interviews = useQuery(api.interviews.getAllInterviews);
   const updateStatus = useMutation(api.interviews.updateInterviewStatus);

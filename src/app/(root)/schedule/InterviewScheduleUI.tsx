@@ -28,7 +28,6 @@ import { Loader2Icon, XIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { TIME_SLOTS } from "@/constants";
 import MeetingCard from "@/components/MeetingCard";
-import { sanitizeUserId } from "@/lib/utils";
 
 function InterviewScheduleUI() {
   const client = useStreamVideoClient();
@@ -44,9 +43,6 @@ function InterviewScheduleUI() {
   const interviewers = users?.filter((u) => u.role === "interviewer");
 
   const currentUserEmail = session?.user?.email;
-  const currentUserId = currentUserEmail
-    ? sanitizeUserId(currentUserEmail)
-    : "";
 
   const [formData, setFormData] = useState({
     title: "",

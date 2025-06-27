@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ModeToggle } from "./ModeToggle";
 import { useSession, signOut } from "next-auth/react";
 import DasboardBtn from "./DasboardBtn";
 import LoginButton from "./LoginButton";
-import { Blocks, User, LogOut } from "lucide-react";
+import { Blocks, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -20,9 +19,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 function Navbar() {
   const { data: session, status } = useSession();
 
+  // Type assertion to use our custom session type with role
+  const typedSession = session as any;
+
   return (
-    <nav className="w-full bg-transparent">
-      <div className="flex flex-row h-16 sm:h-20 items-center justify-between container mx-auto">
+    <nav className="flex flex-row h-16 sm:h-20 items-center justify-between ">
+      <div className="flex flex-row items-center justify-between w-full">
         {/* LEFT SIDE - LOGO */}
         <Link
           href="/"
@@ -54,17 +56,14 @@ function Navbar() {
         </Link>
 
         {/* RIGHT SIDE - NAVIGATION & AUTH */}
-        <div className="flex items-center gap-2 sm:gap-4">
-          {/* Theme Toggle */}
-          <ModeToggle />
-
+        <div className="flex items-center justify-end gap-2 sm:gap-4">
           {/* Auth Section */}
           {status === "loading" ? (
             <div className="h-8 w-8 animate-pulse bg-gray-200 rounded-full" />
-          ) : session ? (
+          ) : typedSession ? (
             <div className="flex items-center gap-2">
               {/* Dashboard Button for Interviewers */}
-              {session.user.role === "interviewer" && <DasboardBtn />}
+              {typedSession.user?.role === "interviewer" && <DasboardBtn />}
 
               {/* User Menu */}
               <DropdownMenu>
@@ -75,11 +74,11 @@ function Navbar() {
                   >
                     <Avatar className="h-8 w-8">
                       <AvatarImage
-                        src={session.user.image}
-                        alt={session.user.name}
+                        src={typedSession.user?.image || undefined}
+                        alt={typedSession.user?.name || "User"}
                       />
                       <AvatarFallback>
-                        {session.user.name?.charAt(0) || "U"}
+                        {typedSession.user?.name?.charAt(0) || "U"}
                       </AvatarFallback>
                     </Avatar>
                   </Button>
@@ -88,13 +87,13 @@ function Navbar() {
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-medium leading-none">
-                        {session.user.name}
+                        {typedSession.user?.name || "User"}
                       </p>
                       <p className="text-xs leading-none text-muted-foreground">
-                        {session.user.email}
+                        {typedSession.user?.email || "No email"}
                       </p>
                       <p className="text-xs leading-none text-muted-foreground capitalize">
-                        {session.user.role}
+                        {typedSession.user?.role || "Unknown"}
                       </p>
                     </div>
                   </DropdownMenuLabel>

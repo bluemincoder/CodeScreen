@@ -11,7 +11,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <ConvexProviderWithAuth>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

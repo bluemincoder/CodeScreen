@@ -10,7 +10,7 @@ import { LogIn } from "lucide-react";
 import { useSession, signIn } from "next-auth/react";
 
 function RecordingsPage() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const { calls, isLoading } = useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
 

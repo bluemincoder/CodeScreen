@@ -10,7 +10,7 @@ import { useSession, signIn } from "next-auth/react";
 
 function SchedulePage() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const { isInterviewer, isLoading } = useUserRole();
 
   useEffect(() => {

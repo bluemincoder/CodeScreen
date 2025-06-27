@@ -1,8 +1,10 @@
 {
-    "extends": ["next/core-web-vitals", "next/typescript"],
+    "extends": ["next/core-web-vitals", "next/typescript", "next"],
     "rules": {
         "react/jsx-key": "off",
         "@typescript-eslint/no-explicit-any": "off",
-        "react-hooks/rules-of-hooks": "error"
+        "react-hooks/rules-of-hooks": "error",
+        "react/no-unescaped-entities": "off",
+        "@next/next/no-page-custom-font": "off"
     }
 }

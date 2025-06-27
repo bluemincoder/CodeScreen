@@ -148,7 +148,7 @@ function SignedInContent() {
 }
 
 export default function Home() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   // Animation variants
   const fadeInUpVariants = {

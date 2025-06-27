@@ -21,12 +21,12 @@ function ActionCard({
   const firstColor = action.gradient.split(",")[0].trim();
   // If it's a hex, convert to rgba, else fallback to a default
   const spotlightColor = firstColor.startsWith("#")
-    ? hexToRgba(firstColor, 0.45)
-    : ("rgba(59,130,246,0.45)" as `rgba(${number}, ${number}, ${number}, ${number})`);
+    ? hexToRgba(firstColor, 0.65)
+    : ("rgba(59,130,246,0.80)" as `rgba(${number}, ${number}, ${number}, ${number})`);
 
   return (
     <SpotlightCard
-      className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 rounded-2xl bg-white/5 border border-black/10 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10"
+      className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
       spotlightColor={spotlightColor}
     >
       <div

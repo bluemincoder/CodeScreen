@@ -13,7 +13,7 @@ import { signIn } from "next-auth/react";
 
 function MeetingPage() {
   const { id } = useParams();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const { call, isCallLoading } = useGetCallById(id);
 
   const [isSetupComplete, setIsSetupComplete] = useState(false);
