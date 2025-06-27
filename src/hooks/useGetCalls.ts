@@ -1,25 +1,30 @@
 import { useEffect, useState } from "react";
-import { useUser } from "@clerk/nextjs";
+import { useSession } from "next-auth/react";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { sanitizeUserId } from "@/lib/utils";
 
 const useGetCalls = () => {
-  const { user } = useUser();
+  const { data: session } = useSession();
   const client = useStreamVideoClient();
   const [calls, setCalls] = useState<Call[]>();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const loadCalls = async () => {
-      if (!client || !user?.id) return;
+      if (!client || !session?.user?.email) return;
 
       setIsLoading(true);
 
       try {
+        const sanitizedUserId = sanitizeUserId(session.user.email);
         const { calls } = await client.queryCalls({
           sort: [{ field: "starts_at", direction: -1 }],
           filter_conditions: {
             starts_at: { $exists: true },
-            $or: [{ created_by_user_id: user.id }, { members: { $in: [user.id] } }],
+            $or: [
+              { created_by_user_id: sanitizedUserId },
+              { members: { $in: [sanitizedUserId] } },
+            ],
           },
         });
 
@@ -32,7 +37,7 @@ const useGetCalls = () => {
     };
 
     loadCalls();
-  }, [client, user?.id]);
+  }, [client, session?.user?.email]);
 
   const now = new Date();
 

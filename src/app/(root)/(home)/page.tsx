@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import MeetingModal from "@/components/MeetingModal";
 import { Loader2Icon, LogIn } from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
-import { SignedOut, SignInButton, useUser } from "@clerk/nextjs";
+import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
 import { motion, useInView, useAnimation } from "framer-motion";
 import LoaderUI from "@/components/LoaderUI";
@@ -33,9 +33,11 @@ const useScrollAnimation = () => {
 // Component for signed-in functionality
 function SignedInContent() {
   const router = useRouter();
-  const { isSignedIn } = useUser();
+  const { data: session, status } = useSession();
   const { isInterviewer, isLoading } = useUserRole();
-  const interviews = useQuery(api.interviews.getMyInterviews);
+  const interviews = useQuery(api.interviews.getMyInterviews, {
+    userEmail: session?.user?.email || "",
+  });
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<"start" | "join">();
 
@@ -55,20 +57,18 @@ function SignedInContent() {
   };
 
   // If user is not signed in, show interviewer UI with login prompts
-  if (!isSignedIn) {
+  if (status !== "authenticated") {
     return (
       <div className="flex flex-col gap-10 mx-auto container px-2 sm:px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {QUICK_ACTIONS.map((action) => (
             <div key={action.title} className="h-full w-full cursor-pointer">
-              <SignInButton mode="modal">
-                <div>
-                  <ActionCard
-                    action={action}
-                    onClick={() => {}} // Empty function since SignInButton handles the click
-                  />
-                </div>
-              </SignInButton>
+              <div onClick={() => signIn("google")}>
+                <ActionCard
+                  action={action}
+                  onClick={() => {}} // Empty function since signIn handles the click
+                />
+              </div>
             </div>
           ))}
         </div>
@@ -148,6 +148,8 @@ function SignedInContent() {
 }
 
 export default function Home() {
+  const { data: session, status } = useSession();
+
   // Animation variants
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -267,7 +269,7 @@ export default function Home() {
               </motion.div>
 
               {/* CTA Button - Show for signed out users */}
-              <SignedOut>
+              {status !== "authenticated" && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -275,14 +277,15 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <SignInButton mode="modal">
-                    <button className="mt-6 flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg transition-all duration-200 font-medium shadow-lg">
-                      <LogIn className="w-4 h-4 transition-transform" />
-                      <span className="max-sm:hidden">Get Started!</span>
-                    </button>
-                  </SignInButton>
+                  <button
+                    onClick={() => signIn("google")}
+                    className="mt-6 flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg transition-all duration-200 font-medium shadow-lg"
+                  >
+                    <LogIn className="w-4 h-4 transition-transform" />
+                    <span className="max-sm:hidden">Get Started!</span>
+                  </button>
                 </motion.div>
-              </SignedOut>
+              )}
             </motion.div>
 
             {/* Right Content (Image) — remains unchanged and hidden on small screens */}
@@ -324,7 +327,7 @@ export default function Home() {
       <SignedInContent />
 
       {/* Show sign-in prompt for signed-out users */}
-      <SignedOut>
+      {status !== "authenticated" && (
         <div className="flex flex-col gap-10 mx-auto container">
           <motion.div
             variants={fadeInUpVariants}
@@ -338,15 +341,16 @@ export default function Home() {
               Sign in to access your dashboard, schedule interviews, and start
               conducting technical assessments.
             </p>
-            <SignInButton mode="modal">
-              <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg transition-all duration-200 font-medium shadow-lg mx-auto">
-                <LogIn className="w-4 h-4" />
-                Sign In to Continue
-              </button>
-            </SignInButton>
+            <button
+              onClick={() => signIn("google")}
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg transition-all duration-200 font-medium shadow-lg mx-auto"
+            >
+              <LogIn className="w-4 h-4" />
+              Sign In to Continue
+            </button>
           </motion.div>
         </div>
-      </SignedOut>
+      )}
     </div>
   );
 }

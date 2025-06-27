@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "./globals.css";
-import ConvexClerkProvider from "@/components/providers/ConvexClerkProvider";
+import Providers from "@/components/providers/Providers";
 import Navbar from "@/components/Navbar";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { Toaster } from "react-hot-toast";
 import Footer from "@/components/Footer";
 
 const geistSans = localFont({
@@ -30,31 +28,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ConvexClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {/* Ultra-smooth background gradients */}
-            <div className="fixed inset-0 bg-gradient-to-br from-blue-100/30 via-transparent dark:from-blue-900/5 dark:via-transparent to-purple-100/5 dark:to-purple-900/15 backdrop-blur-[100px] pointer-events-none" />
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Providers>
+          {/* Ultra-smooth background gradients */}
+          <div className="fixed inset-0 bg-gradient-to-br from-blue-100/30 via-transparent dark:from-blue-900/5 dark:via-transparent to-purple-100/5 dark:to-purple-900/15 backdrop-blur-[100px] pointer-events-none" />
 
-            <div className="min-h-[calc(100vh-150px)] relative z-10">
-              <div className="mt-4 px-4 sm:px-6 lg:px-8">
-                <Navbar />
-              </div>
-              <main className="px-4 sm:px-6 lg:px-8">{children}</main>
+          <div className="min-h-[calc(100vh-150px)] relative z-10">
+            <div className="mt-4 px-4 sm:px-6 lg:px-8">
+              <Navbar />
             </div>
-            <Footer />
-          </ThemeProvider>
-          <Toaster />
-        </body>
-      </html>
-    </ConvexClerkProvider>
+            <main className="px-4 sm:px-6 lg:px-8">{children}</main>
+          </div>
+          <Footer />
+        </Providers>
+      </body>
+    </html>
   );
 }

@@ -3,26 +3,24 @@ import { v } from "convex/values";
 
 export const getAllInterviews = query({
   handler: async (ctx) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) throw new Error("Unauthorized");
-
+    // Simple auth check - always pass for now
+    // TODO: Implement proper NextAuth integration
     const interviews = await ctx.db.query("interviews").collect();
-
     return interviews;
   },
 });
 
 export const getMyInterviews = query({
-  handler: async (ctx) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) return [];
-
+  args: { userEmail: v.string() },
+  handler: async (ctx, args) => {
+    // Simple auth check - always pass for now
+    // TODO: Implement proper NextAuth integration
     const interviews = await ctx.db
       .query("interviews")
-      .withIndex("by_candidate_id", (q) => q.eq("candidateId", identity.subject))
+      .withIndex("by_candidate_id", (q) => q.eq("candidateId", args.userEmail))
       .collect();
 
-    return interviews!;
+    return interviews;
   },
 });
 
@@ -31,7 +29,9 @@ export const getInterviewByStreamCallId = query({
   handler: async (ctx, args) => {
     return await ctx.db
       .query("interviews")
-      .withIndex("by_stream_call_id", (q) => q.eq("streamCallId", args.streamCallId))
+      .withIndex("by_stream_call_id", (q) =>
+        q.eq("streamCallId", args.streamCallId)
+      )
       .first();
   },
 });
@@ -47,9 +47,8 @@ export const createInterview = mutation({
     interviewerIds: v.array(v.string()),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) throw new Error("Unauthorized");
-
+    // Simple auth check - always pass for now
+    // TODO: Implement proper NextAuth integration
     return await ctx.db.insert("interviews", {
       ...args,
     });

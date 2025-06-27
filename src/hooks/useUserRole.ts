@@ -1,20 +1,16 @@
-import { useUser } from "@clerk/nextjs";
-import { useQuery } from "convex/react";
-import { api } from "../../convex/_generated/api";
+import { useSession } from "next-auth/react";
 
 export const useUserRole = () => {
-  const { user, isSignedIn } = useUser();
+  const { data: session, status } = useSession();
 
-  const userData = useQuery(api.users.getUserByClerkId, {
-    clerkId: user?.id || "",
-  });
-
-  // If user is not signed in, don't show loading state
-  const isLoading = isSignedIn ? userData === undefined : false;
+  const isLoading = status === "loading";
+  const isInterviewer = session?.user?.role === "interviewer";
+  const isCandidate = session?.user?.role === "candidate";
 
   return {
     isLoading,
-    isInterviewer: userData?.role === "interviewer",
-    isCandidate: userData?.role === "candidate",
+    isInterviewer,
+    isCandidate,
+    role: session?.user?.role,
   };
 };
