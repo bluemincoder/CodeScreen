@@ -34,10 +34,10 @@ export default function RootLayout({
       >
         <Providers>
           {/* Ultra-smooth background gradients */}
-          <div className="fixed inset-0 bg-gradient-to-br from-blue-100/30 via-transparent dark:from-blue-900/5 dark:via-transparent to-purple-100/5 dark:to-purple-900/15 backdrop-blur-[100px] pointer-events-none" />
+          <div className="fixed inset-0 bg-blue-100/30 dark:bg-black/70 backdrop-blur-[100px] pointer-events-none" />
 
           <div className="min-h-[calc(100vh-150px)] relative z-10">
-            <div className="px-4">
+            <div className="md:px-8 px-4">
               <Navbar />
             </div>
             <main className="px-4 sm:px-6 lg:px-8">{children}</main>
