@@ -27,6 +27,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUserRole } from "@/hooks/useUserRole";
 import LoaderUI from "@/components/LoaderUI";
 import { signIn } from "next-auth/react";
+import {
+  ThemeProvider as MuiThemeProvider,
+  createTheme,
+  CssBaseline,
+} from "@mui/material";
+import { useTheme as useNextTheme } from "next-themes";
 
 function NewSchedulePage() {
   const client = useStreamVideoClient();
@@ -35,6 +41,13 @@ function NewSchedulePage() {
   const { isInterviewer, isLoading: roleLoading } = useUserRole();
   const [isCreating, setIsCreating] = useState(false);
   const users = useQuery(api.users.getUsers) ?? [];
+  const { resolvedTheme } = useNextTheme();
+
+  const muiTheme = createTheme({
+    palette: {
+      mode: resolvedTheme === "dark" ? "dark" : "light",
+    },
+  });
 
   const candidates = users?.filter((u) => u.role === "candidate");
   const interviewers = users?.filter((u) => u.role === "interviewer");
@@ -165,202 +178,206 @@ function NewSchedulePage() {
   }
 
   return (
-    <div className="container max-w-4xl mx-auto p-6 space-y-6">
-      {/* Header */}
-      <div className="flex items-center gap-24 justify-start">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => router.push("/schedule")}
-          className="flex items-center gap-2 justify-start"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Interviews
-        </Button>
-        <div className="flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold">
-            Schedule New Interview
-          </h1>
-          <p className="text-muted-foreground mt-1">
-            Create a new technical interview session
-          </p>
+    <MuiThemeProvider theme={muiTheme}>
+      <CssBaseline />
+      <div className="container max-w-4xl mx-auto p-6 space-y-6">
+        {/* Header */}
+        <div className="flex items-center gap-24 justify-start">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => router.push("/schedule")}
+            className="flex items-center gap-2 justify-start"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Interviews
+          </Button>
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="text-3xl font-bold">Schedule New Interview</h1>
+            <p className="text-muted-foreground mt-1">
+              Create a new technical interview session
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* Form */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Interview Details</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Interview Title */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Title</label>
-            <Input
-              placeholder="Enter interview title"
-              value={formData.title}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  title: e.target.value,
-                })
-              }
-            />
-          </div>
-
-          {/* Interview Description */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Description</label>
-            <Textarea
-              placeholder="Enter interview description"
-              value={formData.description}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  description: e.target.value,
-                })
-              }
-              rows={4}
-            />
-          </div>
-
-          {/* Candidate Selection */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Candidate</label>
-            <Select
-              value={formData.candidateId}
-              onValueChange={(candidateId) =>
-                setFormData({
-                  ...formData,
-                  candidateId,
-                })
-              }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select candidate" />
-              </SelectTrigger>
-              <SelectContent>
-                {candidates.map((candidate) => (
-                  <SelectItem key={candidate.email} value={candidate.email}>
-                    <UserInfo user={candidate} />
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Interviewers Selection */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Interviewers</label>
-            <div className="flex flex-wrap gap-2 mb-3">
-              {selectedInterviewers.map((interviewer) => (
-                <div
-                  key={interviewer.email}
-                  className="inline-flex items-center gap-2 bg-secondary px-3 py-2 rounded-md text-sm"
-                >
-                  <UserInfo user={interviewer} />
-                  {interviewer.email !== currentUserEmail && (
-                    <button
-                      onClick={() => removeInterviewer(interviewer.email)}
-                      className="hover:text-destructive transition-colors"
-                    >
-                      <XIcon className="h-4 w-4" />
-                    </button>
-                  )}
-                </div>
-              ))}
-            </div>
-            {availableInterviewers.length > 0 && (
-              <Select onValueChange={addInterviewer}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Add interviewer" />
-                </SelectTrigger>
-                <SelectContent>
-                  {availableInterviewers.map((interviewer) => (
-                    <SelectItem
-                      key={interviewer.email}
-                      value={interviewer.email}
-                    >
-                      <UserInfo user={interviewer} />
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
-          </div>
-
-          {/* Date and Time */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Date */}
+        {/* Form */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Interview Details</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Interview Title */}
             <div className="space-y-2">
-              <label className="text-sm font-medium">Date</label>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePicker
-                  value={formData.date}
-                  onChange={(newValue) =>
-                    newValue && setFormData({ ...formData, date: newValue })
-                  }
-                  minDate={new Date()}
-                  slotProps={{
-                    textField: {
-                      fullWidth: true,
-                      size: "small",
-                      placeholder: "Select date",
-                      sx: {
-                        "& .MuiOutlinedInput-root": {
-                          borderRadius: "6px",
-                        },
-                      },
-                    },
-                  }}
-                />
-              </LocalizationProvider>
+              <label className="text-sm font-medium">Title</label>
+              <Input
+                placeholder="Enter interview title"
+                value={formData.title}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    title: e.target.value,
+                  })
+                }
+              />
             </div>
 
-            {/* Time */}
+            {/* Interview Description */}
             <div className="space-y-2">
-              <label className="text-sm font-medium">Time</label>
+              <label className="text-sm font-medium">Description</label>
+              <Textarea
+                placeholder="Enter interview description"
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    description: e.target.value,
+                  })
+                }
+                rows={4}
+              />
+            </div>
+
+            {/* Candidate Selection */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Candidate</label>
               <Select
-                value={formData.time}
-                onValueChange={(time) => setFormData({ ...formData, time })}
+                value={formData.candidateId}
+                onValueChange={(candidateId) =>
+                  setFormData({
+                    ...formData,
+                    candidateId,
+                  })
+                }
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select time" />
+                  <SelectValue placeholder="Select candidate" />
                 </SelectTrigger>
                 <SelectContent>
-                  {TIME_SLOTS.map((time) => (
-                    <SelectItem key={time} value={time}>
-                      {time}
+                  {candidates.map((candidate) => (
+                    <SelectItem key={candidate.email} value={candidate.email}>
+                      <UserInfo user={candidate} />
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-          </div>
 
-          {/* Action Buttons */}
-          <div className="flex justify-end gap-3 pt-6 border-t">
-            <Button variant="outline" onClick={() => router.push("/schedule")}>
-              Cancel
-            </Button>
-            <Button
-              onClick={scheduleMeeting}
-              disabled={isCreating}
-              className="min-w-[140px]"
-            >
-              {isCreating ? (
-                <>
-                  <Loader2Icon className="mr-2 size-4 animate-spin" />
-                  Scheduling...
-                </>
-              ) : (
-                "Schedule Interview"
+            {/* Interviewers Selection */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Interviewers</label>
+              <div className="flex flex-wrap gap-2 mb-3">
+                {selectedInterviewers.map((interviewer) => (
+                  <div
+                    key={interviewer.email}
+                    className="inline-flex items-center gap-2 bg-secondary px-3 py-2 rounded-md text-sm"
+                  >
+                    <UserInfo user={interviewer} />
+                    {interviewer.email !== currentUserEmail && (
+                      <button
+                        onClick={() => removeInterviewer(interviewer.email)}
+                        className="hover:text-destructive transition-colors"
+                      >
+                        <XIcon className="h-4 w-4" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              {availableInterviewers.length > 0 && (
+                <Select onValueChange={addInterviewer}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Add interviewer" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {availableInterviewers.map((interviewer) => (
+                      <SelectItem
+                        key={interviewer.email}
+                        value={interviewer.email}
+                      >
+                        <UserInfo user={interviewer} />
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               )}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+            </div>
+
+            {/* Date and Time */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Date */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Date</label>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    value={formData.date}
+                    onChange={(newValue) =>
+                      newValue && setFormData({ ...formData, date: newValue })
+                    }
+                    minDate={new Date()}
+                    slotProps={{
+                      textField: {
+                        fullWidth: true,
+                        size: "small",
+                        placeholder: "Select date",
+                        sx: {
+                          "& .MuiOutlinedInput-root": {
+                            borderRadius: "6px",
+                          },
+                        },
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
+              </div>
+
+              {/* Time */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Time</label>
+                <Select
+                  value={formData.time}
+                  onValueChange={(time) => setFormData({ ...formData, time })}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select time" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {TIME_SLOTS.map((time) => (
+                      <SelectItem key={time} value={time}>
+                        {time}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex justify-end gap-3 pt-6 border-t">
+              <Button
+                variant="outline"
+                onClick={() => router.push("/schedule")}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={scheduleMeeting}
+                disabled={isCreating}
+                className="min-w-[140px]"
+              >
+                {isCreating ? (
+                  <>
+                    <Loader2Icon className="mr-2 size-4 animate-spin" />
+                    Scheduling...
+                  </>
+                ) : (
+                  "Schedule Interview"
+                )}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </MuiThemeProvider>
   );
 }
 
