@@ -30,7 +30,6 @@ import MeetingCard from "@/components/MeetingCard";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { TextField } from "@mui/material";
 
 function InterviewScheduleUI() {
   const client = useStreamVideoClient();

@@ -8,12 +8,20 @@ import { useState, useEffect, useRef } from "react";
 import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import MeetingModal from "@/components/MeetingModal";
-import { Loader2Icon, LogIn } from "lucide-react";
+import {
+  Loader2Icon,
+  LogIn,
+  Code2,
+  Users,
+  Calendar,
+  Clock,
+} from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
 import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
 import { motion, useInView, useAnimation } from "framer-motion";
 import LoaderUI from "@/components/LoaderUI";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 
 // Custom hook for scroll animations
 const useScrollAnimation = () => {
@@ -59,18 +67,123 @@ function SignedInContent() {
   // If user is not signed in, show interviewer UI with login prompts
   if (status !== "authenticated") {
     return (
-      <div className="flex flex-col gap-10 mx-auto container px-2 sm:px-4">
+      <div className="flex flex-col gap-10 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {QUICK_ACTIONS.map((action) => (
-            <div key={action.title} className="h-full w-full cursor-pointer">
-              <div onClick={() => signIn("google")}>
-                <ActionCard
-                  action={action}
-                  onClick={() => {}} // Empty function since signIn handles the click
-                />
+          {/* New Call */}
+          <SpotlightCard
+            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+            spotlightColor="rgba(30, 60, 114, 0.6)"
+          >
+            <div
+              className="w-full h-full flex flex-col justify-between cursor-pointer"
+              style={{ minHeight: "100%" }}
+              onClick={() => handleQuickAction("New Call")}
+            >
+              <div className="flex items-start justify-start mb-6">
+                <div
+                  className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5 border border-white/20 group-hover:from-blue-400/30 group-hover:to-blue-600/20 transition-all duration-300 shadow-md"
+                  style={{
+                    background: "linear-gradient(135deg, #1e3c72, #2a5298)",
+                  }}
+                >
+                  <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
+                </div>
               </div>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-2 text-start drop-shadow-sm">
+                New Call
+              </h3>
+              <p className="text-sm sm:text-base text-black dark:text-white/80 text-start font-normal">
+                Start an instant call
+              </p>
             </div>
-          ))}
+          </SpotlightCard>
+
+          {/* Join Interview */}
+          <SpotlightCard
+            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+            spotlightColor="rgba(66, 39, 90, 0.6)"
+          >
+            <div
+              className="w-full h-full flex flex-col justify-between cursor-pointer"
+              style={{ minHeight: "100%" }}
+              onClick={() => handleQuickAction("Join Interview")}
+            >
+              <div className="flex items-start justify-start mb-6">
+                <div
+                  className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5 border border-white/20 group-hover:from-blue-400/30 group-hover:to-blue-600/20 transition-all duration-300 shadow-md"
+                  style={{
+                    background: "linear-gradient(135deg, #42275a, #734b6d)",
+                  }}
+                >
+                  <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
+                </div>
+              </div>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-2 text-start drop-shadow-sm">
+                Join Interview
+              </h3>
+              <p className="text-sm sm:text-base text-black dark:text-white/80 text-start font-normal">
+                Enter via invitation link
+              </p>
+            </div>
+          </SpotlightCard>
+
+          {/* Schedule */}
+          <SpotlightCard
+            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+            spotlightColor="rgba(19, 78, 74, 0.6)"
+          >
+            <div
+              className="w-full h-full flex flex-col justify-between cursor-pointer"
+              style={{ minHeight: "100%" }}
+              onClick={() => router.push("/schedule")}
+            >
+              <div className="flex items-start justify-start mb-6">
+                <div
+                  className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5 border border-white/20 group-hover:from-blue-400/30 group-hover:to-blue-600/20 transition-all duration-300 shadow-md"
+                  style={{
+                    background: "linear-gradient(135deg, #134e4a, #2dd4bf)",
+                  }}
+                >
+                  <Calendar className="w-6 h-6 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
+                </div>
+              </div>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-2 text-start drop-shadow-sm">
+                Schedule
+              </h3>
+              <p className="text-sm sm:text-base text-black dark:text-white/80 text-start font-normal">
+                Plan upcoming interviews
+              </p>
+            </div>
+          </SpotlightCard>
+
+          {/* Recordings */}
+          <SpotlightCard
+            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+            spotlightColor="rgba(40, 62, 81, 0.6)"
+          >
+            <div
+              className="w-full h-full flex flex-col justify-between cursor-pointer"
+              style={{ minHeight: "100%" }}
+              onClick={() => router.push("/recordings")}
+            >
+              <div className="flex items-start justify-start mb-6">
+                <div
+                  className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5 border border-white/20 group-hover:from-blue-400/30 group-hover:to-blue-600/20 transition-all duration-300 shadow-md"
+                  style={{
+                    background: "linear-gradient(135deg, #283E51, #485563)",
+                  }}
+                >
+                  <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
+                </div>
+              </div>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-2 text-start drop-shadow-sm">
+                Recordings
+              </h3>
+              <p className="text-sm sm:text-base text-black dark:text-white/80 text-start font-normal">
+                Access past interviews
+              </p>
+            </div>
+          </SpotlightCard>
         </div>
       </div>
     );
@@ -84,14 +197,121 @@ function SignedInContent() {
       {isInterviewer ? (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {QUICK_ACTIONS.map((action) => (
-              <div key={action.title} className="h-full w-full cursor-pointer">
-                <ActionCard
-                  action={action}
-                  onClick={() => handleQuickAction(action.title)}
-                />
+            {/* New Call */}
+            <SpotlightCard
+              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+              spotlightColor="rgba(30, 60, 114, 0.65)"
+            >
+              <div
+                className="w-full h-full flex flex-col justify-between cursor-pointer"
+                style={{ minHeight: "100%" }}
+                onClick={() => handleQuickAction("New Call")}
+              >
+                <div className="flex items-start justify-start mb-6">
+                  <div
+                    className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5 border border-white/20 group-hover:from-blue-400/30 group-hover:to-blue-600/20 transition-all duration-300 shadow-md"
+                    style={{
+                      background: "linear-gradient(135deg, #1e3c72, #2a5298)",
+                    }}
+                  >
+                    <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
+                  </div>
+                </div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-2 text-start drop-shadow-sm">
+                  New Call
+                </h3>
+                <p className="text-sm sm:text-base text-black dark:text-white/80 text-start font-normal">
+                  Start an instant call
+                </p>
               </div>
-            ))}
+            </SpotlightCard>
+
+            {/* Join Interview */}
+            <SpotlightCard
+              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+              spotlightColor="rgba(66, 39, 90, 0.6)"
+            >
+              <div
+                className="w-full h-full flex flex-col justify-between cursor-pointer"
+                style={{ minHeight: "100%" }}
+                onClick={() => handleQuickAction("Join Interview")}
+              >
+                <div className="flex items-start justify-start mb-6">
+                  <div
+                    className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5 border border-white/20 group-hover:from-blue-400/30 group-hover:to-blue-600/20 transition-all duration-300 shadow-md"
+                    style={{
+                      background: "linear-gradient(135deg, #42275a, #734b6d)",
+                    }}
+                  >
+                    <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
+                  </div>
+                </div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-2 text-start drop-shadow-sm">
+                  Join Interview
+                </h3>
+                <p className="text-sm sm:text-base text-black dark:text-white/80 text-start font-normal">
+                  Enter via invitation link
+                </p>
+              </div>
+            </SpotlightCard>
+
+            {/* Schedule */}
+            <SpotlightCard
+              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+              spotlightColor="rgba(19, 78, 74, 0.6)"
+            >
+              <div
+                className="w-full h-full flex flex-col justify-between cursor-pointer"
+                style={{ minHeight: "100%" }}
+                onClick={() => router.push("/schedule")}
+              >
+                <div className="flex items-start justify-start mb-6">
+                  <div
+                    className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5 border border-white/20 group-hover:from-blue-400/30 group-hover:to-blue-600/20 transition-all duration-300 shadow-md"
+                    style={{
+                      background: "linear-gradient(135deg, #134e4a, #2dd4bf)",
+                    }}
+                  >
+                    <Calendar className="w-6 h-6 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
+                  </div>
+                </div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-2 text-start drop-shadow-sm">
+                  Schedule
+                </h3>
+                <p className="text-sm sm:text-base text-black dark:text-white/80 text-start font-normal">
+                  Plan upcoming interviews
+                </p>
+              </div>
+            </SpotlightCard>
+
+            {/* Recordings */}
+            <SpotlightCard
+              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+              spotlightColor="rgba(40, 62, 81, 0.6)"
+            >
+              <div
+                className="w-full h-full flex flex-col justify-between cursor-pointer"
+                style={{ minHeight: "100%" }}
+                onClick={() => router.push("/recordings")}
+              >
+                <div className="flex items-start justify-start mb-6">
+                  <div
+                    className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5 border border-white/20 group-hover:from-blue-400/30 group-hover:to-blue-600/20 transition-all duration-300 shadow-md"
+                    style={{
+                      background: "linear-gradient(135deg, #283E51, #485563)",
+                    }}
+                  >
+                    <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
+                  </div>
+                </div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-2 text-start drop-shadow-sm">
+                  Recordings
+                </h3>
+                <p className="text-sm sm:text-base text-black dark:text-white/80 text-start font-normal">
+                  Access past interviews
+                </p>
+              </div>
+            </SpotlightCard>
           </div>
 
           <MeetingModal
@@ -167,7 +387,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-[linear-gradient(#1f1f1f_1px,transparent_1px),linear-gradient(90deg,#1f1f1f_1px,transparent_1px)] bg-[size:20px_20px]" />
             </div> */}
 
-      <section className="relative z-10 py-5 px-4 sm:px-6 lg:px-8">
+      <section className="relative z-10 pt-5 pb-10 px-4 sm:px-6 lg:px-8">
         <div className="">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
             {/* Left Content */}
