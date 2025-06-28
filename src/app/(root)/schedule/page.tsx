@@ -77,7 +77,7 @@ function SchedulePage() {
         </div>
       ) : interviews.length > 0 ? (
         <div className="space-y-4">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 px-10">
             {interviews.map((interview: Doc<"interviews">) => (
               <MeetingCard key={interview._id} interview={interview} />
             ))}

@@ -40,7 +40,7 @@ function RecordingsPage() {
 
   if (status !== "authenticated") {
     return (
-      <div className="container max-w-7xl mx-auto p-6">
+      <div className="p-6">
         <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
           <h1 className="text-3xl font-bold">Recordings</h1>
           <p className="text-muted-foreground text-center max-w-md">
@@ -60,7 +60,7 @@ function RecordingsPage() {
   }
 
   return (
-    <div className="container max-w-7xl mx-auto p-6">
+    <div className="p-6">
       {/* HEADER SECTION */}
       <h1 className="text-3xl font-bold">Recordings</h1>
       <p className="text-muted-foreground my-1">

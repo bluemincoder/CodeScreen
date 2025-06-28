@@ -34,7 +34,7 @@ function MeetingPage() {
           </p>
           <button
             onClick={() => signIn("google")}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg transition-all duration-200 font-medium shadow-lg mx-auto"
+            className="flex items-center gap-2 px-6 py-3 text-white rounded-lg transition-all duration-200 font-medium shadow-lg mx-auto"
           >
             <LogIn className="w-4 h-4" />
             Sign In to Continue

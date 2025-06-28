@@ -66,10 +66,10 @@ function SignedInContent() {
   if (status !== "authenticated") {
     return (
       <div className="flex flex-col gap-10 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {/* New Call */}
           <SpotlightCard
-            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
             spotlightColor="rgba(30, 60, 114, 0.6)"
           >
             <div
@@ -98,7 +98,7 @@ function SignedInContent() {
 
           {/* Join Interview */}
           <SpotlightCard
-            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
             spotlightColor="rgba(66, 39, 90, 0.6)"
           >
             <div
@@ -127,7 +127,7 @@ function SignedInContent() {
 
           {/* Schedule */}
           <SpotlightCard
-            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
             spotlightColor="rgba(19, 78, 74, 0.6)"
           >
             <div
@@ -156,7 +156,7 @@ function SignedInContent() {
 
           {/* Recordings */}
           <SpotlightCard
-            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+            className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
             spotlightColor="rgba(40, 62, 81, 0.6)"
           >
             <div
@@ -194,11 +194,11 @@ function SignedInContent() {
     <div className="flex flex-col gap-10 px-4 sm:px-6 lg:px-8">
       {isInterviewer ? (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {/* New Call */}
             <SpotlightCard
-              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
-              spotlightColor="rgba(30, 60, 114, 0.65)"
+              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+              spotlightColor="rgba(30, 60, 114, 0.6)"
             >
               <div
                 className="w-full h-full flex flex-col justify-between cursor-pointer"
@@ -226,7 +226,7 @@ function SignedInContent() {
 
             {/* Join Interview */}
             <SpotlightCard
-              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
               spotlightColor="rgba(66, 39, 90, 0.6)"
             >
               <div
@@ -255,7 +255,7 @@ function SignedInContent() {
 
             {/* Schedule */}
             <SpotlightCard
-              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
               spotlightColor="rgba(19, 78, 74, 0.6)"
             >
               <div
@@ -284,7 +284,7 @@ function SignedInContent() {
 
             {/* Recordings */}
             <SpotlightCard
-              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 sm:p-6 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
+              className="h-full w-full cursor-pointer flex flex-col justify-start items-start p-4 md:p-8 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-400/40 group-hover:bg-white/10 dark:border-neutral-800"
               spotlightColor="rgba(40, 62, 81, 0.6)"
             >
               <div

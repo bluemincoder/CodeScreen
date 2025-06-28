@@ -36,7 +36,7 @@ export default function RootLayout({
           {/* Ultra-smooth background gradients */}
           <div className="fixed inset-0 bg-blue-100/30 dark:bg-black/70 backdrop-blur-[100px] pointer-events-none" />
 
-          <div className="min-h-[calc(100vh-150px)] relative z-10">
+          <div className="min-h-screen relative z-10">
             <div className="md:px-8 px-4">
               <Navbar />
             </div>
