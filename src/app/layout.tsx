@@ -40,7 +40,7 @@ export default function RootLayout({
             <div className="md:px-8 px-4">
               <Navbar />
             </div>
-            <main className="px-4 sm:px-6 lg:px-8">{children}</main>
+            <main className="">{children}</main>
           </div>
           <Footer />
         </Providers>

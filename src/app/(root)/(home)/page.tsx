@@ -80,7 +80,7 @@ function SignedInContent() {
   if (isLoading) return <LoaderUI />;
 
   return (
-    <div className="flex flex-col gap-10 mx-auto container px-2 sm:px-4">
+    <div className="flex flex-col gap-10 px-4 sm:px-6 lg:px-8">
       {isInterviewer ? (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -167,8 +167,8 @@ export default function Home() {
                 <div className="absolute inset-0 bg-[linear-gradient(#1f1f1f_1px,transparent_1px),linear-gradient(90deg,#1f1f1f_1px,transparent_1px)] bg-[size:20px_20px]" />
             </div> */}
 
-      <section className="relative z-10 py-10 px-4 sm:px-6 lg:px-8">
-        <div className="container mx-auto">
+      <section className="relative z-10 py-5 px-4 sm:px-6 lg:px-8">
+        <div className="">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
             {/* Left Content */}
             <motion.div
