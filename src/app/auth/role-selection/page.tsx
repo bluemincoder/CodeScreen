@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "convex/react";
@@ -17,13 +17,22 @@ import { UserCheck, Users, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 export default function RoleSelectionPage() {
-  const { data: session, update } = useSession();
+  const { data: session, update, status } = useSession();
   const router = useRouter();
   const updateUserRole = useMutation(api.users.updateUserRole);
   const [selectedRole, setSelectedRole] = useState<
     "candidate" | "interviewer" | null
   >(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // If user already has a role, redirect to home
+  useEffect(() => {
+    if (status === "loading") return;
+
+    if (session?.user && (session.user as any).role) {
+      router.push("/");
+    }
+  }, [session, status, router]);
 
   const handleRoleSelection = async (role: "candidate" | "interviewer") => {
     if (!session?.user?.email) {
@@ -57,7 +66,8 @@ export default function RoleSelectionPage() {
     }
   };
 
-  if (!session?.user) {
+  // Show loading while checking session
+  if (status === "loading" || !session?.user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -68,8 +78,20 @@ export default function RoleSelectionPage() {
     );
   }
 
+  // If user already has a role, show loading while redirecting
+  if ((session.user as any).role) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+          <p>Redirecting...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">
@@ -90,7 +112,7 @@ export default function RoleSelectionPage() {
               <UserCheck className="h-8 w-8" />
               <div className="text-left">
                 <div className="font-semibold">Interviewer</div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm ">
                   Conduct technical interviews and assess candidates
                 </div>
               </div>
@@ -105,7 +127,7 @@ export default function RoleSelectionPage() {
               <Users className="h-8 w-8" />
               <div className="text-left">
                 <div className="font-semibold">Candidate</div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm ">
                   Participate in technical interviews and assessments
                 </div>
               </div>

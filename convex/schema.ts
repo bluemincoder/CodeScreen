@@ -6,7 +6,7 @@ export default defineSchema({
     name: v.string(),
     email: v.string(),
     image: v.optional(v.string()),
-    role: v.union(v.literal("candidate"), v.literal("interviewer")),
+    role: v.optional(v.union(v.literal("candidate"), v.literal("interviewer"))),
   }).index("by_email", ["email"]),
 
   interviews: defineTable({

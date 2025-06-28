@@ -25,9 +25,12 @@ import {
 } from "@/components/ui/select";
 import UserInfo from "@/components/UserInfo";
 import { Loader2Icon, XIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
 import { TIME_SLOTS } from "@/constants";
 import MeetingCard from "@/components/MeetingCard";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { TextField } from "@mui/material";
 
 function InterviewScheduleUI() {
   const client = useStreamVideoClient();
@@ -260,18 +263,30 @@ function InterviewScheduleUI() {
                 {/* CALENDAR */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Date</label>
-                  <Calendar
-                    selected={formData.date}
-                    onSelect={(date: Date | undefined) =>
-                      date && setFormData({ ...formData, date })
-                    }
-                    disabled={(date: Date) => date < new Date()}
-                    className="rounded-md border"
-                  />
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      value={formData.date}
+                      onChange={(newValue) =>
+                        newValue && setFormData({ ...formData, date: newValue })
+                      }
+                      minDate={new Date()}
+                      slotProps={{
+                        textField: {
+                          fullWidth: true,
+                          size: "small",
+                          placeholder: "Select date",
+                          sx: {
+                            "& .MuiOutlinedInput-root": {
+                              borderRadius: "6px",
+                            },
+                          },
+                        },
+                      }}
+                    />
+                  </LocalizationProvider>
                 </div>
 
                 {/* TIME */}
-
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Time</label>
                   <Select

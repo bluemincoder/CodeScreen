@@ -4,7 +4,7 @@ declare module "next-auth" {
       email: string;
       name: string;
       image: string;
-      role: "candidate" | "interviewer";
+      role: "candidate" | "interviewer" | null;
     };
   }
 
@@ -12,7 +12,7 @@ declare module "next-auth" {
     email: string;
     name: string;
     image: string;
-    role?: "candidate" | "interviewer";
+    role?: "candidate" | "interviewer" | null;
   }
 }
 
@@ -21,6 +21,6 @@ declare module "next-auth/jwt" {
     email: string;
     name: string;
     picture: string;
-    role: "candidate" | "interviewer";
+    role: "candidate" | "interviewer" | null;
   }
 }

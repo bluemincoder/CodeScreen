@@ -1,11 +1,11 @@
-import NextAuth from "next-auth";
+import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../../../../../convex/_generated/api";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
-const handler = NextAuth({
+const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -13,7 +13,7 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account }: any) {
       if (account && user) {
         // First time sign in
         token.email = user.email;
@@ -38,16 +38,16 @@ const handler = NextAuth({
           const userData = await convex.query(api.users.getUserByEmail, {
             email: token.email,
           });
-          token.role = userData?.role || "interviewer";
+          token.role = userData?.role || null; // Allow null for users without role
         } catch (error) {
           console.error("Error fetching user role:", error);
-          token.role = "interviewer";
+          token.role = null;
         }
       }
 
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       if (token) {
         session.user.email = token.email;
         session.user.name = token.name;
@@ -56,14 +56,24 @@ const handler = NextAuth({
       }
       return session;
     },
+    async redirect({ url, baseUrl }: any) {
+      // If user doesn't have a role, redirect to role selection
+      if (url.startsWith(baseUrl) && !url.includes("/auth/role-selection")) {
+        // This will be handled in the client-side redirect logic
+        return url;
+      }
+      return url;
+    },
   },
   pages: {
     signIn: "/auth/signin",
     newUser: "/auth/role-selection",
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
