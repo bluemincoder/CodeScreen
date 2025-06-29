@@ -7,13 +7,31 @@ const cors = require("cors");
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://codescreen.site",
+      "https://www.codescreen.site",
+      process.env.CLIENT_URL, // Allow environment variable for client URL
+    ].filter(Boolean), // Remove any undefined values
     methods: ["GET", "POST"],
+    credentials: true,
   },
   transports: ["websocket", "polling"],
 });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://codescreen.site",
+      "https://www.codescreen.site",
+      process.env.CLIENT_URL,
+    ].filter(Boolean),
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Store user connections and room data
@@ -150,6 +168,10 @@ app.get("/room/:roomId", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5001;
+const CLIENT_URL = process.env.CLIENT_URL || "https://codescreen.site";
+
 server.listen(PORT, () => {
   console.log(`Collaborative server running on port ${PORT}`);
+  console.log(`Allowed origins: ${io.engine.opts.cors.origin.join(", ")}`);
+  console.log(`Client URL: ${CLIENT_URL}`);
 });

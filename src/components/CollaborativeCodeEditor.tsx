@@ -61,7 +61,14 @@ function CollaborativeCodeEditor() {
     const initSocket = async () => {
       try {
         const { default: io } = await import("socket.io-client");
-        socketRef.current = io("http://localhost:5001");
+
+        // Use environment variable for server URL, fallback to localhost for development
+        const serverUrl =
+          process.env.NEXT_PUBLIC_COLLABORATIVE_SERVER_URL ||
+          "http://localhost:5001";
+        socketRef.current = io(serverUrl, {
+          transports: ["websocket", "polling"],
+        });
 
         socketRef.current.on("connect", () => {
           console.log("Connected to collaborative server");

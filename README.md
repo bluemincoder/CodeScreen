@@ -110,6 +110,9 @@ NEXT_PUBLIC_CONVEX_URL=your-convex-url
 # Stream Video API
 NEXT_PUBLIC_STREAM_API_KEY=your-stream-api-key
 STREAM_SECRET_KEY=your-stream-secret-key
+
+# Collaborative Server (for production deployment)
+NEXT_PUBLIC_COLLABORATIVE_SERVER_URL=https://your-collaborative-server-domain.com
 ```
 
 ### Installation & Running
@@ -148,6 +151,28 @@ STREAM_SECRET_KEY=your-stream-secret-key
 3. Go to the "API Keys" section
 4. Copy your **API Key** and **Secret Key**
 5. Add them to your `.env.local` file
+
+### Deploying the Collaborative Server
+
+For production deployment, you need to deploy the collaborative server separately:
+
+1. **Deploy the collaborative server** to a hosting service (e.g., Railway, Render, Heroku, or your own server)
+2. **Set the environment variable** `NEXT_PUBLIC_COLLABORATIVE_SERVER_URL` to your deployed server URL
+3. **Configure CORS** in the collaborative server to allow your domain
+
+Example deployment on Railway:
+
+```bash
+# Deploy collaborative-server.js to Railway
+railway up collaborative-server.js
+```
+
+Example deployment on Render:
+
+- Create a new Web Service
+- Set the build command: `npm install`
+- Set the start command: `node collaborative-server.js`
+- Add environment variables as needed
 
 ---
 
