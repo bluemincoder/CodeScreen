@@ -57,15 +57,17 @@ function MeetingPage() {
   }
 
   return (
-    <StreamCall call={call}>
-      <StreamTheme>
-        {!isSetupComplete ? (
-          <MeetingSetup onSetupComplete={() => setIsSetupComplete(true)} />
-        ) : (
-          <MeetingRoom />
-        )}
-      </StreamTheme>
-    </StreamCall>
+    <>
+      <StreamCall call={call}>
+        <StreamTheme>
+          {!isSetupComplete ? (
+            <MeetingSetup onSetupComplete={() => setIsSetupComplete(true)} />
+          ) : (
+            <MeetingRoom />
+          )}
+        </StreamTheme>
+      </StreamCall>
+    </>
   );
 }
 
